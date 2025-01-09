@@ -13,14 +13,21 @@ class Fibonacci {
     int cached;
 
 public:
-    // TODO: 实现构造器
-    // Fibonacci()
+    // 实现构造器
+    Fibonacci() : cached(2) { // 初始化缓存
+        cache[0] = 0;
+        cache[1] = 1;
+    }
 
-    // TODO: 实现正确的缓存优化斐波那契计算
+    // 实现正确的缓存优化斐波那契计算
     size_t get(int i) {
-        for (; false; ++cached) {
-            cache[cached] = cache[cached - 1] + cache[cached - 2];
+        if (i < cached) {
+            return cache[i]; // 如果已缓存，直接返回
         }
+        for (int j = cached; j <= i; ++j) {
+            cache[j] = cache[j - 1] + cache[j - 2]; // 计算并缓存
+        }
+        cached = i + 1; // 更新已缓存的数量
         return cache[i];
     }
 };
